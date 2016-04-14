@@ -17,6 +17,9 @@ class ViewController: UIViewController, UITableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        refresher.addTarget(self, action: "refreshing:", forControlEvents: .ValueChanged)
+        tasksTableView.addSubview(refresher)
     }
     
     @IBAction func addButton(sender: AnyObject) {
@@ -40,6 +43,14 @@ class ViewController: UIViewController, UITableViewDataSource {
 
         alert.addAction(a2)
         presentViewController(alert, animated: true, completion: nil)
+    }
+    
+    let refresher = UIRefreshControl()
+    
+    func refreshing(sender: UIRefreshControl) {
+        sender.beginRefreshing()
+        print("Hello")
+        sender.endRefreshing()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
