@@ -35,6 +35,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="taskLabel" destination="wnu-59-cTC" id="Wff-Qv-sua"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -47,9 +50,14 @@
                             <constraint firstItem="sfR-U9-Rpg" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="VNR-MV-20n"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Yb6-U3-nn4"/>
+                    <navigationItem key="navigationItem" id="Yb6-U3-nn4">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="qUs-QC-PiK">
+                            <connections>
+                                <action selector="addButton:" destination="BYZ-38-t0r" id="ZMl-Kc-sVO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="taskLabel" destination="wnu-59-cTC" id="jk3-Gu-0ya"/>
                         <outlet property="tasksTableView" destination="sfR-U9-Rpg" id="jNl-Fw-5qG"/>
                     </connections>
                 </viewController>

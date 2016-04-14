@@ -13,6 +13,7 @@
 		4F71A8A51CBFD26A0013BA99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4F71A8A41CBFD26A0013BA99 /* Assets.xcassets */; };
 		4F71A8A81CBFD26A0013BA99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F71A8A61CBFD26A0013BA99 /* LaunchScreen.storyboard */; };
 		4FA9F2961CBFD59400E69C58 /* TaskTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F2951CBFD59400E69C58 /* TaskTableViewCell.swift */; };
+		4FA9F2981CBFDA4200E69C58 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FA9F2971CBFDA4200E69C58 /* Task.swift */; };
 		EF74B28AB66797E729A3A7D5 /* Pods_Okonau.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 222C4C0A092A12149A2A0ABD /* Pods_Okonau.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,6 +27,7 @@
 		4F71A8A71CBFD26A0013BA99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4F71A8A91CBFD26A0013BA99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4FA9F2951CBFD59400E69C58 /* TaskTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskTableViewCell.swift; sourceTree = "<group>"; };
+		4FA9F2971CBFDA4200E69C58 /* Task.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		5E1CF551EE18BDB691F0E520 /* Pods-Okonau.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Okonau.release.xcconfig"; path = "Pods/Target Support Files/Pods-Okonau/Pods-Okonau.release.xcconfig"; sourceTree = "<group>"; };
 		D98E54A9741DD9ECD9E76AF7 /* Pods-Okonau.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Okonau.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Okonau/Pods-Okonau.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +72,7 @@
 				4F71A8A41CBFD26A0013BA99 /* Assets.xcassets */,
 				4F71A8A61CBFD26A0013BA99 /* LaunchScreen.storyboard */,
 				4F71A8A91CBFD26A0013BA99 /* Info.plist */,
+				4FA9F2971CBFDA4200E69C58 /* Task.swift */,
 			);
 			path = Okonau;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4FA9F2981CBFDA4200E69C58 /* Task.swift in Sources */,
 				4F71A8A01CBFD26A0013BA99 /* ViewController.swift in Sources */,
 				4F71A89E1CBFD26A0013BA99 /* AppDelegate.swift in Sources */,
 				4FA9F2961CBFD59400E69C58 /* TaskTableViewCell.swift in Sources */,
