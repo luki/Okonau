@@ -15,11 +15,14 @@ class ViewController: UIViewController, UITableViewDataSource {
     let ref = Firebase(url: "http://okonau.firebaseIO.com")
     var tasks = [Task]()
     
+    let refresher = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tasksTableView.dataSource = self
         
-        refresher.addTarget(self, action: "refreshing:", forControlEvents: .ValueChanged)
         tasksTableView.addSubview(refresher)
+        refresher.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
     }
     
     @IBAction func addButton(sender: AnyObject) {
@@ -31,7 +34,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         
         let a1 = UIAlertAction(title: "Add", style: .Cancel) { (action) in
             let textfield = alert.textFields![0] as UITextField
-            let task = Task(taskName: textfield.text!, checked: false)
+            let task = Task(key: "23", taskName: textfield.text!, checked: false)
             let lala = self.ref.childByAppendingPath(textfield.text!)
             lala.setValue(task.toAnyObject())
         }
@@ -45,21 +48,38 @@ class ViewController: UIViewController, UITableViewDataSource {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    let refresher = UIRefreshControl()
-    
-    func refreshing(sender: UIRefreshControl) {
+    func refresh(sender: UIRefreshControl) {
+        
         sender.beginRefreshing()
-        print("Hello")
+        
+        ref.observeEventType(.Value, withBlock: { (snapshot) in
+            
+            var newTasks = [Task]()
+            
+            for task in snapshot.children {
+                let task = Task(snapshot: task as! FDataSnapshot)
+                newTasks.append(task)
+            }
+            
+            self.tasks = newTasks
+            self.tasksTableView.reloadData()
+            
+        })
+        
         sender.endRefreshing()
+        
+        
     }
-    
+
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return tasks.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tasksTableView.dequeueReusableCellWithIdentifier("taskCell") as! TaskTableViewCell
+        cell.taskLabel.text = tasks[indexPath.row].taskName
         return cell
+        print("\(tasks[indexPath.row].taskName)")
     }
 
 
