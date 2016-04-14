@@ -1,0 +1,6 @@
+framework module Pods_Okonau {
+  umbrella header "Pods-Okonau-umbrella.h"
+
+  export *
+  module * { export * }
+}
