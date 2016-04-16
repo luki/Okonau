@@ -10,10 +10,10 @@ import Foundation
 import Firebase
 
 struct Task {
-    let key: String
-    let taskName: String
-    let checked: Bool
-    let ref: Firebase?
+    var key: String
+    var taskName: String
+    var checked: Bool
+    var ref: Firebase?
     
     init(key: String, taskName: String, checked: Bool) {
         self.key = key

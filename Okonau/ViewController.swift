@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
     @IBOutlet weak var tasksTableView: UITableView!
     let ref = Firebase(url: "http://okonau.firebaseIO.com")
@@ -20,6 +20,7 @@ class ViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         tasksTableView.dataSource = self
+        tasksTableView.delegate = self
         
         tasksTableView.addSubview(refresher)
         refresher.addTarget(self, action: "refresh:", forControlEvents: .ValueChanged)
@@ -48,10 +49,7 @@ class ViewController: UIViewController, UITableViewDataSource {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    func refresh(sender: UIRefreshControl) {
-        
-        sender.beginRefreshing()
-        
+    func retrieveData() {
         ref.observeEventType(.Value, withBlock: { (snapshot) in
             
             var newTasks = [Task]()
@@ -66,6 +64,12 @@ class ViewController: UIViewController, UITableViewDataSource {
             
         })
         
+    }
+    
+    func refresh(sender: UIRefreshControl) {
+        
+        sender.beginRefreshing()
+        retrieveData()
         sender.endRefreshing()
         
         
@@ -78,10 +82,39 @@ class ViewController: UIViewController, UITableViewDataSource {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tasksTableView.dequeueReusableCellWithIdentifier("taskCell") as! TaskTableViewCell
         cell.taskLabel.text = tasks[indexPath.row].taskName
+        if tasks[indexPath.row].checked == true {
+            cell.accessoryType = .Checkmark
+        } else {
+            cell.accessoryType = .None
+        }
         return cell
-        print("\(tasks[indexPath.row].taskName)")
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        let toRemoveValue = tasks[indexPath.row]
+        toRemoveValue.ref?.removeValue()
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        var task = tasks[indexPath.row]
+        
+        if let cell = tasksTableView.cellForRowAtIndexPath(indexPath) {
+            if cell.accessoryType == .Checkmark {
+                cell.accessoryType = .None
+                task.checked = false
+                task.ref?.updateChildValues(["checked": false])
+            } else {
+                cell.accessoryType = .Checkmark
+                task.checked = true
+                task.ref?.updateChildValues(["checked": true])
+            }
+        }
+        
+        tasks[indexPath.row] = task
+        print(tasks[indexPath.row].checked)
+        
     }
 
 
 }
-
